@@ -1,23 +1,25 @@
-//Codigo para generar información de categorias y almacenarlas en un arreglo.
+    //Codigo para generar información de categorias y almacenarlas en un arreglo.
 var categorias = [];
 (()=>{
-  //Este arreglo es para generar textos de prueba
-  let textosDePrueba=[
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore, modi!",
-      "Quos numquam neque animi ex facilis nesciunt enim id molestiae.",
-      "Quaerat quod qui molestiae sequi, sint aliquam omnis quos voluptas?",
-      "Non impedit illum eligendi voluptas. Delectus nisi neque aspernatur asperiores.",
-      "Ducimus, repellendus voluptate quo veritatis tempora recusandae dolorem optio illum."
-  ]
-  
-  //Genera dinamicamente los JSON de prueba para esta evaluacion,
-  //Primer ciclo para las categorias y segundo ciclo para las apps de cada categoria
+    //Este arreglo es para generar textos de prueba
+    let textosDePrueba=[
+        "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore, modi!",
+        "Quos numquam neque animi ex facilis nesciunt enim id molestiae.",
+        "Quaerat quod qui molestiae sequi, sint aliquam omnis quos voluptas?",
+        "Non impedit illum eligendi voluptas. Delectus nisi neque aspernatur asperiores.",
+        "Ducimus, repellendus voluptate quo veritatis tempora recusandae dolorem optio illum."
+    ]
 
-  let aplicaciones = []
-  //Obtenemos la referencia a la tech de LocalStorage
-  let localstorage = window.localStorage;
-  //guardar, para hacerlo mas eficiente si ya existe que no lo vuelva a crear.
-  if (localstorage.getItem('categorias') == null) {
+    //Genera dinamicamente los JSON de prueba para esta evaluacion,
+    //Primer ciclo para las categorias y segundo ciclo para las apps de cada categoria
+
+    let aplicaciones = []
+    //Obtenemos la referencia a la tech de LocalStorage
+    let localstorage = window.localStorage;
+
+    /* Condicion para crear base en local Storage, para hacerlo mas eficiente 
+    si ya existe que no lo vuelva a crear. */
+    if (localstorage.getItem('categorias') == null) {
     let contador = 1;
     for (let i=0;i<5;i++){//Generar 5 categorias
         let categoria = {
@@ -51,18 +53,19 @@ var categorias = [];
     /* Siempre se usara una variable para poder acceder. Tal como apps. */
     localstorage.setItem('categorias', JSON.stringify(categorias));
     apps = JSON.parse(localstorage.getItem('categorias'));
-  } else {
+    } else {
     apps = JSON.parse(localstorage.getItem('categorias'));
-  };
+    };
 
-  /* Llenamos el select con las categorias. */
-  for (let index = 0; index < apps.length; index++) {
+    /* Llenamos el select con las categorias. */
+    for (let index = 0; index < apps.length; index++) {
     document.getElementById("selector").innerHTML +=
     `<option value="${index}">${apps[index].nombreCategoria}</option>`
     };
 })();
 
 
+/* Con esta funcion se carga de manera reactiva los formularios del LocalStorage. */
 function cargarApps() {
     document.getElementById("app").innerHTML = '';
     seleccion = document.getElementById("selector").value;
@@ -85,23 +88,32 @@ function cargarApps() {
 
         /* Tuvimos que hacer un replace ya que daba error al usar comillas. */
         nombreApp = JSON.stringify(apps[seleccion].aplicaciones[index]).replace(/\"/g,"&quot;")
-            
+        aplicativo = apps[seleccion].aplicaciones[index];
+
         /* Agregamos las apps dinamicamente. */
         document.getElementById("app").innerHTML += 
         `
         <!-- Esto lo manejaremos en js. -->
         <div class="col-2 mb-2">
-            <div class="card" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
-                <div class=" imagen">
-                    <img src="${apps[seleccion].aplicaciones[index].icono}" class="card-img-top" alt="...">
+            <div class="card">
+                <div class=" imagen" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
+                    <img src="${aplicativo.icono}" class="card-img-top" alt="...">
                 </div>
-                <div class="card-body" style="margin-left: -10px; height: 115px;">
-                <h5 class="card-title" style="margin-top: -25px;">${apps[seleccion].aplicaciones[index].nombre}</h5>
-                <p class="card-text" style="margin-top: -10px;">${apps[seleccion].aplicaciones[index].desarrollador}</p>
-                <div class="mb-1" style="margin-top: -10px;">
+                <div class="card-body" style="margin-left: -10px; height: 115px;" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
+                <h5 class="card-title" style="margin-top: -25px;">${aplicativo.nombre}</h5>
+                <p class="card-text" style="margin-top: -10px;">${aplicativo.desarrollador}</p>
+                <div style="margin-top: -15px;">
                     ${calificacionEstrella}
                 </div>
-                <h5>$3.15</h5>
+            </div>
+            <div class="col-10" style="margin-top: -50px;">
+                <div class= row>
+                    <div class="col-8" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
+                    <h5>$3.15</h5>
+                    </div >
+                    <div class="col-4 mb-2">
+                        <button class="btn btn-outline-danger btn-sm" onclick="eliminar(${index})"><i class="far fa-trash-alt"></i></button>
+                    </div>
                 </div>
             </div>
         </div>`
@@ -121,7 +133,8 @@ function generarModal(app){
     }
 
     comment = '';
-    /* Hicimos una condicion ya que comentarios son por parte de usuarios y no el creador. */
+
+    /* Hicimos una condicion ya que los comentarios son creados por los usuarios y no el creador. */
     if (app.comentarios == null) {
         comment = '';
     } else {
@@ -147,6 +160,7 @@ function generarModal(app){
             </div>`;}
     }
     
+    /* Condicions para mostrar boton Instalar. Se muestra si el valor instalada es false. */
     disponible = '';
     if (app.instalada == true) {
         disponible = ''
@@ -231,6 +245,7 @@ function generarModal(app){
 }
  
 
+/* Funcion para mostrar la modal para agregar nueva APP. */
 function ModalAgregar() {
     let localstorage = window.localStorage;
     document.getElementById('Imagen').innerHTML = ''
@@ -238,16 +253,17 @@ function ModalAgregar() {
     appAgregar = JSON.parse(localstorage.getItem('categorias'));
     sele = ''
 
+    /* Llenamos dinamicamente la opcion de fotografia. */
     for (let index = 0; index < appAgregar[seleccion].aplicaciones.length; index++) {
         sele += `<option value="${appAgregar[seleccion].aplicaciones[index].icono}"> Imagen ${JSON.stringify(appAgregar[seleccion].aplicaciones[index].codigo)} </option>`;
     }
 
    document.getElementById('Imagen').innerHTML += `${sele}`; 
    $('#exampleModal1').modal('show');
-}
+};
 
 
-
+/* Esta es una funcion para agregar la app al Local Storage. */
 function AgregarApp() {
     const app = {
         codigo: document.getElementById('Codigo').value,
@@ -264,15 +280,25 @@ function AgregarApp() {
     };
     
     seleccion = document.getElementById("selector").value;
-    
     let localstorage = window.localStorage;
     cat = JSON.parse(localstorage.getItem('categorias'));
-
     cat[seleccion].aplicaciones.push(app);
-
     localstorage.setItem('categorias', JSON.stringify(cat));
 
     cargarApps();
     console.log('Agregada con exito.');
     $('#exampleModal1').modal('hide');
-}
+};
+
+
+/* Esta es una funcion para eliminar una app en el Local Storage, se hace de manera reactiva */
+function eliminar(app){
+    seleccion = document.getElementById("selector").value;
+    let localstorage = window.localStorage;
+    cat = JSON.parse(localstorage.getItem('categorias'));
+    cat[seleccion].aplicaciones.splice(app, 1)
+    localstorage.setItem('categorias', JSON.stringify(cat));
+
+    console.log('Eliminada: ', app);
+    cargarApps();
+};

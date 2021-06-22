@@ -1,80 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Amazon Appstore</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/all.css"><!--FontAwesome-->
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600&display=swap" rel="stylesheet">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Amazon Appstore</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="css/all.css"><!--FontAwesome-->
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
 
-    <nav class="navbar navbar-expand-md fixed-top" style="background-color: #040707; height: 50px;">
-        <a class="navbar-brand mb-1" >
-            <img style="cursor: pointer;" class="w-75" src="img/logo.png">
-        </a>
-        <button class="btn btn-secondary" style=" color: black;background-color: #FFC018;" onclick="ModalAgregar()">
-            Agregar App
-        </button>
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" style=" background-color: #FFC018;">
-                <i class="fas fa-search" style="color:#040707;"></i>
+        <nav class="navbar navbar-expand-md fixed-top" style="background-color: #040707; height: 50px;">
+            <a class="navbar-brand mb-1" >
+                <img style="cursor: pointer;" class="w-75" src="img/logo.png">
+            </a>
+            <button class="btn btn-secondary" style=" color: black;background-color: #FFC018;" onclick="ModalAgregar()">
+                Agregar App
             </button>
-        </form>
-    </nav>
+            <form class="form-inline my-2 my-lg-0 ml-auto">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit" style=" background-color: #FFC018;">
+                    <i class="fas fa-search" style="color:#040707;"></i>
+                </button>
+            </form>
+        </nav>
 
-    <main role="main" class="container">
-        <div class="row">
-            <div class="col-12">
-                <select id="selector" onchange="cargarApps()" class="seleccion form-control form-control-lg mb-2" style="cursor: pointer;">
-                </select>
-            </div>
-        </div> 
-        <div class="row mt-3" id="app"></div>
-    </main><!-- /.container -->
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <select id="selector" onchange="cargarApps()" class="seleccion form-control form-control-lg mb-2" style="cursor: pointer;">
+                    </select>
+                </div>
+            </div> 
+            <div class="row mt-3" id="app"></div>
+        </main><!-- /.container -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>        
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agrega tu App</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agrega tu App</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <input class="col-10 mb-2" type="text" id='Nombre' placeholder="Nombre">
+                    <input class="col-10 mb-2" type="text" id='Desarrollador' placeholder="Desarollador">
+                    <input class="col-10 mb-2" type="text" id='Codigo' placeholder="Codigo">
+                    <input class="col-10 mb-2" type="text" id='Descripcion' placeholder="Descripcion">
+                    <select class="custom-select mb-2" id='Instalada'>
+                        <option selected>True o False</option>
+                        <option value="true">Instalada</option>
+                        <option value="false">No Instalada</option>
+                    </select>
+                    <select class="custom-select mb-2" id='Imagen'>
+                        <!-- Contenido generado dinamicamente. -->
+                    </select>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="AgregarApp()">Agregar App</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <input class="col-10 mb-2" type="text" id='Nombre' placeholder="Nombre">
-                <input class="col-10 mb-2" type="text" id='Desarrollador' placeholder="Desarollador">
-                <input class="col-10 mb-2" type="text" id='Codigo' placeholder="Codigo">
-                <input class="col-10 mb-2" type="text" id='Descripcion' placeholder="Descripcion">
-                <select class="custom-select mb-2" id='Instalada'>
-                    <option selected>True o False</option>
-                    <option value="true">Instalada</option>
-                    <option value="false">No Instalada</option>
-                  </select>
-                <select class="custom-select mb-2" id='Imagen'>
-                    <!-- Contenido generado dinamicamente. -->
-                </select>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" onclick="AgregarApp()">Agregar App</button>
             </div>
         </div>
-        </div>
-    </div>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/controlador.js"></script>
-</body>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/controlador.js"></script>
+    </body>
 </html>
