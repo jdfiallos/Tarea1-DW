@@ -108,10 +108,11 @@ function cargarApps() {
             </div>
             <div class="col-10" style="margin-top: -50px;">
                 <div class= row>
-                    <div class="col-8" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
+                    <div class="col-9" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
+                    <!-- Agregamos el dinero estaticamente, ya que no esta en el JSON. -->
                     <h5>$3.15</h5>
                     </div >
-                    <div class="col-4 mb-2">
+                    <div class="col-3 mb-2">
                         <button class="btn btn-outline-danger btn-sm" onclick="eliminar(${index})"><i class="far fa-trash-alt"></i></button>
                     </div>
                 </div>
