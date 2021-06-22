@@ -27,7 +27,8 @@ h5 {
 
 .comentario {
     font-size: 20px !important;
-    color: greenyellow !important;
+    color: green !important;
+    font-style: normal !important;
 }
 
 i {

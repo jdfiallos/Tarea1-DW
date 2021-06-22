@@ -15,12 +15,14 @@
 
     <nav class="navbar navbar-expand-md fixed-top" style="background-color: #040707; height: 50px;">
         <a class="navbar-brand mb-1" >
-            <img style="cursor: pointer;" class="w-75" src="img/logo.png"  data-toggle="modal" data-target="#exampleModal">
+            <img style="cursor: pointer;" class="w-75" src="img/logo.png">
         </a>
-
+        <button class="btn btn-secondary" style=" color: black;background-color: #FFC018;" onclick="ModalAgregar()">
+            Agregar App
+        </button>
         <form class="form-inline my-2 my-lg-0 ml-auto">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" style="background-color: #FFC018;">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" style=" background-color: #FFC018;">
                 <i class="fas fa-search" style="color:#040707;"></i>
             </button>
         </form>
@@ -32,81 +34,44 @@
                 <select id="selector" onchange="cargarApps()" class="seleccion form-control form-control-lg mb-2" style="cursor: pointer;">
                 </select>
             </div>
-        </div>
-        
-        <div class="row mt-3" id="app">
-
-        </div>
-    
+        </div> 
+        <div class="row mt-3" id="app"></div>
     </main><!-- /.container -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>        
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agrega tu App</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
             <div class="modal-body">
-                <div class="row">
-                    <img class="col-11 mx-auto" src="./img/app-screenshots/1.webp">
-                    <div class="col-11 mx-auto">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <img class="col-4 mb-5 mt-1 mx-auto" src="./img/app-icons/1.webp">
-                    <div class="col-7" >
-                        <div class="col-12" style="margin-left: -40px;">
-                            <h3>App 1</h3>
-                        </div>
-                        <div class="col-12" style="margin-left: -40px; margin-top: -5px;">
-                            <p>Desarrollador 1</p>
-                        </div>
-                        <div class="col-12" style="margin-left: -40px; margin-top: -15px;">
-                            <label>
-                                Ducimus, repellendus voluptate quo veritatis tempora recusandae dolorem optio illum.
-                            </label>
-                        </div>
-                        <div class="col-12" style="margin-left: -40px;">
-                            <h5>$3.11</h5>
-                        </div>
-                    </div>
-                    <div class="col-11 mx-auto">
-                        <hr>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-11" style="text-align: center;">
-                        <i class="comentario fas fa-star"></i>
-                        <i class="comentario far fa-star"></i>
-                    </div>
-                </div>   
-                
-                <div class="row">
-                    <div class="col-11 mx-auto">
-                        <hr>
-                    </div>
-                    <img class="col-3 mx-auto rounded-circle" src="./img/user.webp">
-                    <div class="col-8">
-                        <div class="col-12" style="margin-left: -40px;">
-                            <h6>Usuario 1</h6>
-                        </div>
-                        <div class="col-12" style="margin-left: -40px; margin-top: -5px;">
-                            <p>
-                                Ducimus, repellendus voluptate quo veritatis tempora recusandae dolorem optio illum.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-        </div>
-        <div class="modal-footer">
+                <input class="col-10 mb-2" type="text" id='Nombre' placeholder="Nombre">
+                <input class="col-10 mb-2" type="text" id='Desarrollador' placeholder="Desarollador">
+                <input class="col-10 mb-2" type="text" id='Codigo' placeholder="Codigo">
+                <input class="col-10 mb-2" type="text" id='Descripcion' placeholder="Descripcion">
+                <select class="custom-select mb-2" id='Instalada'>
+                    <option selected>True o False</option>
+                    <option value="true">Instalada</option>
+                    <option value="false">No Instalada</option>
+                  </select>
+                <select class="custom-select mb-2" id='Imagen'>
+                    <!-- Contenido generado dinamicamente. -->
+                </select>
+            </div>
+            <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" onclick="AgregarApp()">Agregar App</button>
+            </div>
         </div>
         </div>
     </div>
-  </div>
-              
-
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
