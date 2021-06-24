@@ -94,7 +94,7 @@ function cargarApps() {
         document.getElementById("app").innerHTML += 
         `
         <!-- Esto lo manejaremos en js. -->
-        <div class="col-2 mb-2">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2 mb-2">
             <div class="card">
                 <div class=" imagen" onclick="generarModal(${nombreApp})" data-toggle="modal" data-target="#exampleModal">
                     <img src="${aplicativo.icono}" class="card-img-top" alt="...">
@@ -206,7 +206,7 @@ function generarModal(app){
                         <hr>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     <img class="col-4 mb-5 mt-1 mx-auto" src="${app.icono}">
                     <div class="col-7" >
                         <div class="col-12" style="margin-left: -40px;">

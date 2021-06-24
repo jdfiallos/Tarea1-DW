@@ -43,3 +43,11 @@ i {
 p {
     font-size: 12px !important;
 }
+
+
+@media (max-width: 576px) {
+    .buscar {
+      display: none;
+    }
+}
+  
